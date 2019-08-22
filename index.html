@@ -7,7 +7,22 @@
   <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
   <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-router-dom/5.0.1/react-router-dom.js"> </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+
+
+  <style>
+    body {
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-around;
+    }
+
+  </style>
 
 </head>
 
@@ -22,6 +37,26 @@
 const root = document.querySelector('#root')
 const { render } = ReactDOM;
 const { Component } = React;
+const { Link , HashRouter, Route, Switch } = ReactRouterDOM;
+
+
+
+const Nav = () => {
+  return (
+    <div className ='nav'>
+      <Link to='/'> Home </Link>
+      <Link to='/products'> Products </Link>
+    </div>
+  )
+};
+
+const Home = () => {
+  return (
+    <h1>We have X products with an average price of X </h1>
+    )
+};
+
+
 
 
 class App extends Component {
@@ -33,7 +68,7 @@ class App extends Component {
   }
 
 render() {
-  return (<h1> working</h1>)
+  return (<Nav />)
 }
 
 }
