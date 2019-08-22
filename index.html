@@ -67,10 +67,15 @@ class App extends Component {
     }
   }
 
+  async componentDidMount() {
+  const products = (await axios.get("https://acme-users-api-rev.herokuapp.com/api/products")).data
+  this.setState({ products })
+}
+
 render() {
   return (
     <HashRouter>
-    <Nav />
+      <Nav />
     </HashRouter>)
 }
 
