@@ -59,11 +59,14 @@ const Home = () => {
 
 
 
+
+
+
 class App extends Component {
   constructor(){
     super();
     this.state = {
-      companies: []
+      products: []
     }
   }
 
@@ -76,6 +79,9 @@ render() {
   return (
     <HashRouter>
       <Nav />
+      <Switch>
+        <Route exact path='/' component ={ Home } />
+      </Switch>
     </HashRouter>)
 }
 
