@@ -50,13 +50,15 @@ const Nav = () => {
   )
 };
 
-const Home = () => {
+const Home = ( { products } ) => {
+  console.log("home", products);
   return (
-    <h1>We have X products with an average price of X </h1>
+    <h1>We have {products} products with an average price of X </h1>
     )
 };
 
-const Products = () => {
+const Products = ({ products }) => {
+  console.log("products", products);
   return (
     <h1> Product page coming soon</h1>
   )
@@ -82,12 +84,15 @@ class App extends Component {
 }
 
 render() {
+
+  const { products } = this.state;
+
   return (
     <HashRouter>
       <Nav />
       <Switch>
-        <Route exact path='/' component ={ Home } />
-        <Route part ='/products' component = { Products } />
+        <Route exact path='/' component = { Home } Home products={ products }/>
+        <Route part ='/products' component = { Products } Products products={ products } />
       </Switch>
     </HashRouter>)
 }
