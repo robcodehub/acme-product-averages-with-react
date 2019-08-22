@@ -37,7 +37,7 @@
 const root = document.querySelector('#root')
 const { render } = ReactDOM;
 const { Component } = React;
-const { Link , HashRouter, Route, Switch } = ReactRouterDOM;
+const { Link , HashRouter, Route, Switch, Redirect } = ReactRouterDOM;
 
 
 
@@ -56,6 +56,12 @@ const Home = () => {
     )
 };
 
+const Products = () => {
+  return (
+    <h1> Product page coming soon</h1>
+  )
+
+}
 
 
 
@@ -81,6 +87,7 @@ render() {
       <Nav />
       <Switch>
         <Route exact path='/' component ={ Home } />
+        <Route part ='/products' component = { Products } />
       </Switch>
     </HashRouter>)
 }
