@@ -13,9 +13,33 @@
 
 <body>
 
+<div id="root">
 
-<script>
 
+</div>
+
+<script type='text/babel'>
+const root = document.querySelector('#root')
+const { render } = ReactDOM;
+const { Component } = React;
+
+
+class App extends Component {
+  constructor(){
+    super();
+    this.state = {
+      companies: []
+    }
+  }
+
+render() {
+  return (<h1> working</h1>)
+}
+
+}
+
+
+render(<App />, root)
 
 
 </script>
