@@ -17,7 +17,7 @@
       font-family: Verdana, Geneva, Tahoma, sans-serif;
     }
 
-    .nav {
+    .nav{
       display: flex;
       justify-content: space-around;
     }
@@ -43,7 +43,7 @@ const { Link , HashRouter, Route, Switch, Redirect } = ReactRouterDOM;
 
 const Nav = () => {
   return (
-    <div className ='nav'>
+    <div className ='nav nav-tabs'>
       <Link to='/'> Home </Link>
       <Link to='/products'> Products </Link>
     </div>
@@ -62,15 +62,17 @@ const Home = ( { products } ) => {
     )
 };
 
-const Products = ({products}) => {
-  console.log("products Products=", products);
+const Products = ({products, companies, offerings }) => {
+  console.log("Products products=", products);
+  console.log("Products companies=", companies);
+  console.log("Products offerings=", offerings);
   return (
     <div>
     <h1>
-      Product page coming soon
+      Products
     </h1>
     <ul>
-      {products.map(product => <li key = {product.id}> {product.name} </li>)}
+      {products.map(product => <div key = {product.id}> Product: {product.name} || Suggested Price: {product.suggestedPrice} || Average price: || Lowest Price: </div> )}
       </ul>
     </div>
   )
@@ -90,21 +92,34 @@ class App extends Component {
 
   async componentDidMount() {
   const products = ((await axios.get("https://acme-users-api-rev.herokuapp.com/api/products")).data)
-  console.log("products=", products);
-  this.setState({ products });
+  console.log("products axios=", products);
+
+  const companies = ((await axios.get("https://acme-users-api-rev.herokuapp.com/api/companies")).data)
+
+  const offerings = ((await axios.get("https://acme-users-api-rev.herokuapp.com/api/offerings")).data)
+
+  console.log("products axios=", products);
+
+  console.log("companies axios=", companies);
+
+  console.log("offerings axios=", offerings);
+
+  this.setState({ products, companies, offerings });
 }
 
 render() {
 
-  const { products } = this.state;
+  const { products, companies, offerings } = this.state;
   console.log("products render=", products);
+  console.log("companies render=", companies);
+  console.log("offerings render=", offerings);
 
   return (
     <HashRouter>
       <Route render = { () => <Nav products = { products } /> } />
       <Switch>
         <Route exact path='/' render={() => <Home products= { products } /> } />
-        <Route part ='/products' render={() => <Products products= { products } /> } />
+        <Route part ='/products' render={() => <Products products= { products } companies = {companies} offerings = {offerings} /> } />
       </Switch>
     </HashRouter>)
 }
