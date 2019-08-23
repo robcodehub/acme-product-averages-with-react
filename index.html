@@ -51,9 +51,14 @@ const Nav = () => {
 };
 
 const Home = ( { products } ) => {
+
+  let avgPrice = (products.reduce((sum, product) => {
+    return product.suggestedPrice + sum;
+  }, 0)/products.length).toFixed(2);
+
   console.log("home", products);
   return (
-    <h1>We have {products.length} products with an average price of X </h1>
+    <h1>We have {products.length} products with an average price of ${avgPrice} </h1>
     )
 };
 
