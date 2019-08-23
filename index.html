@@ -53,19 +53,24 @@ const Nav = () => {
 const Home = ( { products } ) => {
   console.log("home", products);
   return (
-    <h1>We have {products} products with an average price of X </h1>
+    <h1>We have {products.length} products with an average price of X </h1>
     )
 };
 
-const Products = ({ products }) => {
-  console.log("products", products);
+const Products = ({products}) => {
+  console.log("products Products=", products);
   return (
-    <h1> Product page coming soon</h1>
+    <div>
+    <h1>
+      Product page coming soon
+    </h1>
+    <ul>
+      {products.map(product => <li key = {product.id}> {product.name} </li>)}
+      </ul>
+    </div>
   )
 
 }
-
-
 
 
 
@@ -79,20 +84,22 @@ class App extends Component {
   }
 
   async componentDidMount() {
-  const products = (await axios.get("https://acme-users-api-rev.herokuapp.com/api/products")).data
-  this.setState({ products })
+  const products = ((await axios.get("https://acme-users-api-rev.herokuapp.com/api/products")).data)
+  console.log("products=", products);
+  this.setState({ products });
 }
 
 render() {
 
   const { products } = this.state;
+  console.log("products render=", products);
 
   return (
     <HashRouter>
-      <Nav />
+      <Route render = { () => <Nav products = { products } /> } />
       <Switch>
-        <Route exact path='/' component = { Home } Home products={ products }/>
-        <Route part ='/products' component = { Products } Products products={ products } />
+        <Route exact path='/' render={() => <Home products= { products } /> } />
+        <Route part ='/products' render={() => <Products products= { products } /> } />
       </Switch>
     </HashRouter>)
 }
