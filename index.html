@@ -66,13 +66,28 @@ const Products = ({products, companies, offerings }) => {
   console.log("Products products=", products);
   console.log("Products companies=", companies);
   console.log("Products offerings=", offerings);
+
+  const prodArr = products.map(product => product.id);
+
+  // const avgPrice = offerings.reduce((acc, product) => {
+  //   if (product.price < acc) {
+  //     return product.price
+  //   } else {
+  //     return acc
+  //   }
+  // }, Infinity)
+
+  console.log("prodArr=", prodArr);
+  //console.log("avg Price=", avgPrice);
+
+
   return (
     <div>
     <h1>
       Products
     </h1>
     <ul>
-      {products.map(product => <div key = {product.id}> Product: {product.name} || Suggested Price: {product.suggestedPrice} || Average price: || Lowest Price:  <hr /> </div> )}
+      {products.map(product => <div key = {product.id}> Product: {product.name} || Suggested Price: {product.suggestedPrice} || Average price:  || Lowest Price:  <hr /> </div> )}
       </ul>
     </div>
   )
